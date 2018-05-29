@@ -49,15 +49,15 @@ X = [ones(m, 1) X];
 %                 initial_theta, options);
 %
 
-
-
-
-
-
-
-
-
-
+for i = 1:num_labels
+    % Initialize thetas
+    initial_theta = zeros(n + 1, 1);
+    % option for fmincg
+    options = optimset('GradObj', 'on', 'MaxIter', 50);     
+    % Use lrCostFunction to calculate cost function and gradient each time
+    % fmincg works similarly to fminunc, but is more more efficient for dealing with a large number of parameters.
+    all_theta(i,:) = fmincg (@(t)(lrCostFunction(t, X, (y == i), lambda)), initial_theta, options);
+end
 
 
 % =========================================================================
